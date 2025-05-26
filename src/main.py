@@ -6,8 +6,9 @@ from httpx import AsyncClient
 import hashlib
 
 # CDN
-CDN_URL = "https://musicfreepluginshub.2020818.xyz/"
-USE_CDN = False
+# CDN_URL = "https://musicfreepluginshub.2020818.xyz/"
+CDN_URL = "https://musicfree.lizkes.com/"
+USE_CDN = True
 VERSION = "0.2.0"
 
 # 定义路径常量
@@ -24,6 +25,8 @@ MAX_RETRIES = 3
 RETRY_DELAY = 1
 REQUEST_TIMEOUT = 10.0
         
+# 排除特定插件，注意需要全小写
+EXCLUDE_PLUGIN_NAME = {"navidrome", "udio", "快手", "六月听书", "果核音乐", "5sing", "好听轻音乐", "种子"}
 
 async def fetch_sub_plugins(url: str, client: AsyncClient) -> list:
     """从订阅源获取单个插件列表
@@ -75,6 +78,11 @@ async def fetch_plugins(plugins: list, client: AsyncClient) -> list:
         Returns:
             (成功标志, 处理后的插件信息)
         """
+        # 去除指定名称的源
+        name = plugin.get("name", url)
+        if name.lower() in EXCLUDE_PLUGIN_NAME:
+            return False, plugin
+        # 对url进行去重
         url = plugin["url"]
         if url in seen_urls:
             return False, plugin
@@ -102,17 +110,16 @@ async def fetch_plugins(plugins: list, client: AsyncClient) -> list:
 
                 # 处理插件信息
                 new_plugin = plugin.copy()
-                name = plugin.get("name", url)
                 
                 # 替换敏感词
-                name = name.replace("网易云", "W").replace("QQ", "T")
+                # name = name.replace("网易云", "W").replace("QQ", "T")
 
                 # 处理重名
                 if name in name_count:
                     name_count[name] += 1
                     new_plugin["name"] = f"{name}_{name_count[name]}"
                 else:
-                    name_count[name] = 0
+                    name_count[name] = 1
                     new_plugin["name"] = name
 
                 # 使用 CDN 替换原始 URL

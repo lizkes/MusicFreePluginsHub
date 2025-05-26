@@ -2,8 +2,8 @@ name: Scheduled Python Worker
 
 on:
   schedule:
-    - cron: "0 17 */2 * *" # 每隔两天 UTC 时间 17:00 (北京时间凌晨 1:00) 运行
-  workflow_dispatch: # 添加手动触发器
+    - cron: "12 19 2 * *" # 每天 UTC 时间 19:12 运行(北京时间凌晨3:12)运行 
+  workflow_dispatch:
 
 jobs:
   run-worker:
@@ -20,6 +20,9 @@ jobs:
 
       - name: Run Python Script
         run: uv run src/main.py
+
+      - name: tar js file for Windows Client
+        run: tar -cJf dist/plugins.tar.xz dist/*.js
 
       - name: Commit and Push
         run: |
