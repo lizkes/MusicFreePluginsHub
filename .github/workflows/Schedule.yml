@@ -31,3 +31,6 @@ jobs:
           git add .
           git diff-index --quiet HEAD || git commit -m "chore: update plugins.json"
           git push
+      # 任务完成后，触发Cloudflare Pages Deploy Hook
+      - name: Trigger Cloudflare Pages Deploy
+        run: curl -X POST ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
