@@ -78,12 +78,12 @@ async def fetch_plugins(plugins: list, client: AsyncClient) -> list:
         Returns:
             (成功标志, 处理后的插件信息)
         """
+        url = plugin["url"]
         # 去除指定名称的源
         name = plugin.get("name", url)
         if name.lower() in EXCLUDE_PLUGIN_NAME:
             return False, plugin
         # 对url进行去重
-        url = plugin["url"]
         if url in seen_urls:
             return False, plugin
         seen_urls.add(url)
