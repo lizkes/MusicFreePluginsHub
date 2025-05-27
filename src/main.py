@@ -26,7 +26,7 @@ RETRY_DELAY = 1
 REQUEST_TIMEOUT = 10.0
         
 # 排除特定插件，注意需要全小写
-EXCLUDE_PLUGIN_NAME = {"navidrome", "udio", "快手", "六月听书", "果核音乐", "5sing", "好听轻音乐", "种子"}
+EXCLUDE_PLUGIN_NAME = {"audiomack", "navidrome", "udio", "快手", "六月听书", "果核音乐", "5sing", "好听轻音乐", "种子", "酷狗"}
 
 async def fetch_sub_plugins(url: str, client: AsyncClient) -> list:
     """从订阅源获取单个插件列表
