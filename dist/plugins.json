@@ -2,11 +2,6 @@
   "desc": "0.2.0",
   "plugins": [
     {
-      "name": "Audiomack",
-      "url": "https://musicfree.lizkes.com/763db2e9286a7826657fb2b88466cfc7.js",
-      "version": "0.0.2"
-    },
-    {
       "name": "歌词网",
       "url": "https://musicfree.lizkes.com/b73a9bcf4c2e7a67a3992ac5a32f85f0.js",
       "version": "0.0.0"
@@ -90,11 +85,6 @@
       "name": "网易云电台",
       "url": "https://musicfree.lizkes.com/c4498b02ec7cc3010028e76aa8cf9292.js",
       "version": "0.0.2"
-    },
-    {
-      "name": "酷狗",
-      "url": "https://musicfree.lizkes.com/822850e4e73aaa990079c59b48387084.js",
-      "version": "0.1.4"
     },
     {
       "name": "网易",
